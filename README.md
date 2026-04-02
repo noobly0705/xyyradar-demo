@@ -48,7 +48,7 @@ python3 scripts/mock_aggregate.py
 
 前端用 GeoJSON 里每个面的 **`properties.name`** 作为键，到 `counts` 里取数；**字符串必须完全一致**（含「省 / 市 / 自治区 / 特别行政区」等官方全称），否则该省在图上会当作 **0**（颜色最浅一档），不会报错。
 
-- **地图数据来源**（与 `src/App.tsx` 一致）：`https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json`
+- **地图数据来源**：`public/geo/china-100000_full.json`（与阿里云 DataV `100000_full` 同源数据；在线 CDN 在 **GitHub Pages** 等站点会因 Referer 返回 **403**，故改为随仓库静态托管）
 - **白名单参考**：`scripts/mock_aggregate.py` 中的 `PROVINCE_NAMES` 已与上述 GeoJSON 常见写法对齐；也可自行下载该 JSON，遍历 `features[].properties.name` 生成合法键集合。
 - **CSV / 业务侧简称**：若只有「北京」「内蒙」等简称，需在聚合脚本里做**显式映射**到全称（例如 `北京` → `北京市`），再写入 `province_counts.json`。
 

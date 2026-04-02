@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import * as echarts from 'echarts'
 import 'echarts-gl'
 
-const CHINA_GEO_URL =
-  'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+/** 省级边界 GeoJSON。曾用阿里云 DataV 在线地址，但带 `*.github.io` Referer 时 CDN 会 403，故随仓库放在 `public/geo/`。 */
+function chinaGeoUrl(): string {
+  return `${import.meta.env.BASE_URL}geo/china-100000_full.json`
+}
 
 /** 开发环境走 Vite 代理 /api/stats；静态部署读 public/stats.json */
 function statsUrl(): string {
@@ -35,7 +37,7 @@ export default function App() {
       setStatus('正在加载地图与数据…')
       try {
         const [geoRes, statRes] = await Promise.all([
-          fetch(CHINA_GEO_URL),
+          fetch(chinaGeoUrl()),
           fetch(statsUrl()),
         ])
         if (!geoRes.ok) throw new Error(`地图数据加载失败: ${geoRes.status}`)
