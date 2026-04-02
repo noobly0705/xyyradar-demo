@@ -4,11 +4,12 @@
 
 ## 在线演示（GitHub Pages）
 
-推送 `main` 分支后由 [GitHub Actions](.github/workflows/deploy-pages.yml) 自动构建部署，页面地址：
+仓库：**[github.com/noobly0705/xyyradar-demo](https://github.com/noobly0705/xyyradar-demo)**  
+推送 `main` 后由 [GitHub Actions](.github/workflows/deploy-pages.yml) 自动构建部署；也可在 Actions 里手动运行 **Deploy GitHub Pages**。
 
 **[https://noobly0705.github.io/xyyradar-demo/](https://noobly0705.github.io/xyyradar-demo/)**
 
-> 首次启用：仓库 **Settings → Pages → Build and deployment**，将 **Source** 选为 **GitHub Actions**（若尚未自动生效）。部署完成后若 404，请等待 Actions 跑完再刷新。
+> 若以后新建仓库需自行开启 Pages：仓库 **Settings → Pages**，**Build and deployment** 的 **Source** 选 **GitHub Actions**。部署后若短暂 404，等待工作流完成后再试。
 
 静态站点读取仓库内构建生成的 `stats.json`（由 `npm run build` 的 `prebuild` 从 `server/data/province_counts.json` 复制）；本地完整体验后端接口请仍按下文启动 FastAPI。
 
