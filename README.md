@@ -9,6 +9,13 @@
 
 **[https://noobly0705.github.io/xyyradar-demo/](https://noobly0705.github.io/xyyradar-demo/)**
 
+> **请用上面这个 `*.github.io` 链接看在线地图**，不要用仓库主页 `github.com/.../xyyradar-demo` 当「演示」——后者是代码仓库，没有部署好的页面。  
+> Fork 后请把本段链接改成 **`https://<你的用户名>.github.io/xyyradar-demo/`**，并在本仓库 **Settings → Pages** 里用 **GitHub Actions** 作为来源（若尚未启用）。
+
+### 为什么仓库里有的链接打开是 403？
+
+阿里云 DataV 的 GeoJSON **直链**（`geo.datav.aliyun.com/areas_v3/bound/100000_full.json`）在浏览器 **从 GitHub 页面跳转过去** 时会带上 `Referer: github.com`，CDN 会 **403**。这与本项目的**在线演示页能否加载地图**无关：演示页已改用仓库内的 `public/geo/china-100000_full.json`，**不再请求**该阿里云地址。请勿在 README 或浏览器里用 DataV 直链做「能否访问地图」的测试。
+
 > 若以后新建仓库需自行开启 Pages：仓库 **Settings → Pages**，**Build and deployment** 的 **Source** 选 **GitHub Actions**。部署后若短暂 404，等待工作流完成后再试。
 
 静态站点读取仓库内构建生成的 `stats.json`（由 `npm run build` 的 `prebuild` 从 `server/data/province_counts.json` 复制）；本地完整体验后端接口请仍按下文启动 FastAPI。
@@ -71,7 +78,7 @@ cd xyyradar-demo
 npm run dev
 ```
 
-开发模式下 Vite 将 `/api` 代理到 `http://127.0.0.1:8000`（见 `vite.config.ts`）。浏览器需**能访问外网**，以加载阿里云 DataV 省级 GeoJSON。
+开发模式下 Vite 将 `/api` 代理到 `http://127.0.0.1:8000`（见 `vite.config.ts`）。地图边界从本地 **`public/geo/china-100000_full.json`** 加载，无需再请求阿里云 CDN。
 
 ## 生产构建
 
